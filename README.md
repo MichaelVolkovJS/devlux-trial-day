@@ -1,6 +1,6 @@
 # How to use it?
 
-Example: `node actions/update-package.js <repo-name> <pachage-name> <new-package-versions>`
+Example: `node actions/update-package.js <repo-name> <package-name> <new-package-versions>`
 
 ## how does it work?
 
