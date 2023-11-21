@@ -1,8 +1,8 @@
-How to use it?
+# How to use it?
 
-Example: node actions/update-package.js <repo-name> <pachage-name> <new-package-versions>
+Example: `node actions/update-package.js <repo-name> <pachage-name> <new-package-versions>`
 
-how does it work?
+## how does it work?
 
 1. Create new branch with name `update-${packageName}-to-${packageVersion}`
 2. Update the `package.json` file
