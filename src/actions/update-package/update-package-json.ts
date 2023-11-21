@@ -38,7 +38,9 @@ export const updatePackageJson = (
   const updatedPackageJson = JSON.stringify(packageJson, null, 2);
 
   if (originalPackageJson === updatedPackageJson) {
-    throw Error("The new file is the same as the old one");
+    throw Error(
+      "The new file is the same as the old one or package does not exist"
+    );
   }
 
   return updatedPackageJson;
