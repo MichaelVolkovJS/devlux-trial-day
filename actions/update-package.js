@@ -51,34 +51,18 @@ const getCurrentPackageJson = async (repoName, branchName) => {
 
 /**
  * This function commit the new `package.json` file to new brach
- * @param {json} updatedPackageJson  upddate `package.json` file in JSON
- * @param {string} commitMessage
- * @param {string} branchName
+ * @param {{message: string, [key: string]: object, branch: string }} commitBody
  * @param {string} repoName
  */
-const commitWithChanges = async (
-  updatedPackageJson,
-  commitMessage,
-  branchName,
-  repoName
-) => {
+const commitChanges = async (commitBody, repoName) => {
   try {
     console.info("Commiting the changes...");
-    await post(
-      `${API_BASE_URL}/${repoName}/src/`,
-      {
-        message: commitMessage,
-        // TODO: try to find another solution
-        "package.json": updatedPackageJson,
-        branch: branchName,
+    await post(`${API_BASE_URL}/${repoName}/src/`, commitBody, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        auth: bitBucketAuth,
-      }
-    );
+      auth: bitBucketAuth,
+    });
   } catch (error) {
     handleError(error);
   }
@@ -137,13 +121,13 @@ async function updatePackageAndOpenPR(repoName, packageName, packageVersion) {
     const updatedPackageJson = JSON.stringify(packageJson, null, 2);
 
     if (originalPackageJson !== updatedPackageJson) {
-      const commitMessage = `Update ${packageName} to version ${packageVersion}`;
-      await commitWithChanges(
-        updatedPackageJson,
-        commitMessage,
-        newBranchName,
-        repoName
-      );
+      const commitBody = {
+        message: `Update ${packageName} to version ${packageVersion}`,
+        // TODO: try to find another solution
+        "package.json": updatedPackageJson,
+        branch: newBranchName,
+      };
+      await commitChanges(commitBody, repoName);
     } else {
       throw Error("The new file is the same as the old one");
     }
