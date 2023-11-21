@@ -1,6 +1,8 @@
 # How to use it?
 
-Example: `node actions/update-package.js <repo-name> <package-name> <new-package-versions>`
+1. clone the repo
+2. run `npm i`
+3. run `npm run update-package <repo-name> <package-name> <new-package-versions>`
 
 ## how does it work?
 
