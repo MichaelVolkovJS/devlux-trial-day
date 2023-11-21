@@ -5,6 +5,8 @@ import { createBranch } from "./create-branch";
 import { getCurrentPackageJson } from "./get-current-package-json";
 import { commitChanges } from "./commit-changes";
 import { createPullRequest } from "./create-pr";
+import { updatePackageJson } from "./update-package-json";
+import { getMainBranch } from "./get-main-branch";
 
 /**
  * This method contains the steps for update the `package.json` file and
@@ -20,33 +22,30 @@ async function updatePackageAndOpenPR(
   packageVersion: string
 ) {
   try {
-    const newBranchName = `update-${packageName}-to-${packageVersion}`;
-
-    await createBranch(repoName, newBranchName);
+    const mainBranchName = await getMainBranch(repoName);
 
     const currentPackageJson: any = await getCurrentPackageJson(
       repoName,
-      newBranchName
+      mainBranchName
     );
 
-    // update the package version
     const packageJson = currentPackageJson.data;
-
     // update and compare package.json files
-    const originalPackageJson = JSON.stringify(packageJson, null, 2);
-    packageJson.dependencies[packageName] = packageVersion;
-    const updatedPackageJson = JSON.stringify(packageJson, null, 2);
+    const updatedPackageJson = updatePackageJson(
+      packageJson,
+      packageName,
+      packageVersion
+    );
 
-    if (originalPackageJson !== updatedPackageJson) {
-      const commitBody: CommitBody = {
-        message: `Update ${packageName} to version ${packageVersion}`,
-        "package.json": updatedPackageJson,
-        branch: newBranchName,
-      };
-      await commitChanges(commitBody, repoName);
-    } else {
-      throw Error("The new file is the same as the old one");
-    }
+    const newBranchName = `update-${packageName}-to-${packageVersion}`;
+    await createBranch(repoName, newBranchName);
+
+    const commitBody: CommitBody = {
+      message: `Update ${packageName} to version ${packageVersion}`,
+      "package.json": updatedPackageJson,
+      branch: newBranchName,
+    };
+    await commitChanges(commitBody, repoName);
 
     const pullRequestTitle = `Update ${packageName} to version ${packageVersion}`;
     await createPullRequest(newBranchName, pullRequestTitle, repoName);
