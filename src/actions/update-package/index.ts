@@ -16,7 +16,7 @@ import { getMainBranch } from "./get-main-branch";
  * @param {string} packageName
  * @param {string} packageVersion
  */
-async function updatePackageAndOpenPR(
+export async function updatePackageAndOpenPR(
   repoName: string,
   packageName: string,
   packageVersion: string
@@ -47,8 +47,12 @@ async function updatePackageAndOpenPR(
     };
     await commitChanges(commitBody, repoName);
 
-    const pullRequestTitle = `Update ${packageName} to version ${packageVersion}`;
-    await createPullRequest(newBranchName, pullRequestTitle, repoName);
+    const pullRequestBody = {
+      title: `Update ${packageName} to version ${packageVersion}`,
+      source: { branch: { name: newBranchName } },
+      destination: { branch: { name: mainBranchName } },
+    };
+    await createPullRequest(pullRequestBody, repoName);
 
     console.log("PR opened!");
   } catch (error) {

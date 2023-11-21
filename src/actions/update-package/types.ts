@@ -8,3 +8,15 @@ export type CommitBody = {
   branch: string;
   "package.json": string;
 };
+
+export type BranchType = {
+  branch: {
+    name: string;
+  };
+};
+
+export type PullRequestBody = {
+  title: string;
+  source: BranchType;
+  destination: BranchType;
+};
