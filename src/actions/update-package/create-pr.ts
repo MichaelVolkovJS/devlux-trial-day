@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { handleError } from "../../utils/handle-error";
-import { API_BASE_URL, bitBucketAuth } from "./cosnts";
+import { API_BASE_URL, bitBucketAuth } from "./consts";
 
 /**
  * This function create the PR from the new branch with updated `package.json`

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { API_BASE_URL, bitBucketAuth } from "./cosnts";
+import { API_BASE_URL, bitBucketAuth } from "./consts";
 import { handleError } from "../../utils/handle-error";
 
 /**
