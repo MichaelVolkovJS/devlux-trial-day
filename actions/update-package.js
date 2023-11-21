@@ -39,7 +39,7 @@ const createBranch = async (repoName, branchName) => {
  */
 const getCurrentPackageJson = async (repoName, branchName) => {
   try {
-    console.info("Getting current package.json...");
+    console.info("Getting current `package.json`...");
     return await get(
       `${API_BASE_URL}/${repoName}/src/${branchName}/package.json`,
       { auth: bitBucketAuth }
@@ -51,7 +51,7 @@ const getCurrentPackageJson = async (repoName, branchName) => {
 
 /**
  * This function commit the new `package.json` file to new brach
- * @param {object} updatedPackageJson
+ * @param {json} updatedPackageJson  upddate `package.json` file in JSON
  * @param {string} commitMessage
  * @param {string} branchName
  * @param {string} repoName
@@ -158,11 +158,13 @@ async function updatePackageAndOpenPR(repoName, packageName, packageVersion) {
 }
 
 // How to use:
-// node script.js <repoName> <packageName> <packageVersion>
+// node actions/update-package.js <repoName> <packageName> <packageVersion>
 const [repoName, packageName, packageVersion] = process.argv.slice(2);
 
-if (!packageName || !packageVersion) {
-  console.error("Please use the package name and the package version");
+if (!repoName || !packageName || !packageVersion) {
+  console.error(
+    "Please provide the repository name, package name and package version"
+  );
 } else {
   updatePackageAndOpenPR(repoName, packageName, packageVersion);
 }
