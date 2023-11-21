@@ -11,6 +11,11 @@ const bitBucketAuth = {
   password: BITBUCKET_PASSWORD,
 };
 
+/**
+ * This function just create the new branch
+ * @param {string} repoName
+ * @param {string} branchName
+ */
 const createBranch = async (repoName, branchName) => {
   try {
     console.info("Creating new branch...");
@@ -27,6 +32,11 @@ const createBranch = async (repoName, branchName) => {
   }
 };
 
+/**
+ * This function getting the current `package.json` file
+ * @param {string} repoName
+ * @param {string} branchName
+ */
 const getCurrentPackageJson = async (repoName, branchName) => {
   try {
     console.info("Getting current package.json...");
@@ -39,6 +49,13 @@ const getCurrentPackageJson = async (repoName, branchName) => {
   }
 };
 
+/**
+ * This function commit the new `package.json` file to new brach
+ * @param {object} updatedPackageJson
+ * @param {string} commitMessage
+ * @param {string} branchName
+ * @param {string} repoName
+ */
 const commitWithChanges = async (
   updatedPackageJson,
   commitMessage,
@@ -67,6 +84,12 @@ const commitWithChanges = async (
   }
 };
 
+/**
+ * This function create the PR from the new branch with updated `package.json`
+ * @param {string} title
+ * @param {string} branchName
+ * @param {string} repoName
+ */
 const createPullRequest = async (branchName, title, repoName) => {
   try {
     console.info("Creating Pull Request...");
@@ -86,6 +109,14 @@ const createPullRequest = async (branchName, title, repoName) => {
   }
 };
 
+/**
+ * This method contains the steps for update the `package.json` file and
+ * create the PR
+ * !! This method gets the params automatically from `process.argv`
+ * @param {string} repoName
+ * @param {string} packageName
+ * @param {string} packageVersion
+ */
 async function updatePackageAndOpenPR(repoName, packageName, packageVersion) {
   try {
     const newBranchName = `update-${packageName}-to-${packageVersion}`;
