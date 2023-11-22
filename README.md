@@ -6,11 +6,11 @@
 
 Aliases for CLI:
 
-- `--repoName` = `-r`
-- `--packageName` = `-p`
-- `--packageVersion` = `-v`
+- `--repoName`:`-r`
+- `--packageName`:`-p`
+- `--packageVersion`:`-v`
 
-## how does it work?
+## How does it work?
 
 1. Create new branch with name `update-${packageName}-to-${packageVersion}`
 2. Update the `package.json` file
