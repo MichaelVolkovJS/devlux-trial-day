@@ -2,7 +2,13 @@
 
 1. clone the repo
 2. run `npm i`
-3. run `npm run update-package <repo-name> <package-name> <new-package-versions>`
+3. run `npm run update-package -- --repoName <repo-name> --packageName <package-name> --packageVersion <package-version>`
+
+Aliases for CLI:
+
+- `--repoName` = `-r`
+- `--packageName` = `-p`
+- `--packageVersion` = `-v`
 
 ## how does it work?
 

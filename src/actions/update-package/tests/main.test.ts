@@ -4,7 +4,7 @@ import { createBranch } from "../create-branch";
 import { createPullRequest } from "../create-pr";
 import { getCurrentPackageJson } from "../get-current-package-json";
 import { getMainBranch } from "../get-main-branch";
-import { updatePackageAndOpenPR } from "../index";
+import { updatePackageAndOpenPR } from "../main";
 import { updatePackageJson } from "../update-package-json";
 
 jest.mock("../get-main-branch");
@@ -69,7 +69,11 @@ describe("updatePackageAndOpenPR", () => {
       packageName,
       packageVersion
     );
-    expect(createBranch).toHaveBeenCalledWith(repoName, newBranchName);
+    expect(createBranch).toHaveBeenCalledWith(
+      mainBranchName,
+      repoName,
+      newBranchName
+    );
     expect(commitChanges).toHaveBeenCalledWith(commitBody, repoName);
     expect(createPullRequest).toHaveBeenCalledWith(pullRequestBody, repoName);
 
