@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { API_BASE_URL, bitBucketAuth } from "./consts";
-import { handleError } from "../../utils/handle-error";
+import { API_BASE_URL, bitBucketAuth } from "../consts";
+import { handleError } from "../../../utils/handle-error";
 
 /**
  * This function getting the current `package.json` file

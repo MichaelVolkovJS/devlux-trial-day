@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
-import { API_BASE_URL, bitBucketAuth } from "./consts";
-import { CommitBody } from "./types";
-import { handleError } from "../../utils/handle-error";
+import { API_BASE_URL, bitBucketAuth } from "../consts";
+import { CommitBody } from "../types";
+import { handleError } from "../../../utils/handle-error";
 
 /**
  * This function commit the new `package.json` file to new brach

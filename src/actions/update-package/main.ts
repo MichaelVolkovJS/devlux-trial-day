@@ -1,11 +1,11 @@
 import { handleError } from "../../utils/handle-error";
 import { CommitBody } from "./types";
-import { createBranch } from "./create-branch";
-import { getCurrentPackageJson } from "./get-current-package-json";
-import { commitChanges } from "./commit-changes";
-import { createPullRequest } from "./create-pr";
-import { updatePackageJson } from "./update-package-json";
-import { getMainBranch } from "./get-main-branch";
+import { createBranch } from "./bit-bucket-actions/create-branch";
+import { getCurrentPackageJson } from "./bit-bucket-actions/get-current-package-json";
+import { commitChanges } from "./bit-bucket-actions/commit-changes";
+import { createPullRequest } from "./bit-bucket-actions/create-pr";
+import { updatePackageJson } from "./bit-bucket-actions/update-package-json";
+import { getMainBranch } from "./bit-bucket-actions/get-main-branch";
 
 /**
  * This method contains the steps for update the `package.json` file and

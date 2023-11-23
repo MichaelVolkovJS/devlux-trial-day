@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { handleError } from "../../utils/handle-error";
-import { API_BASE_URL, bitBucketAuth } from "./consts";
+import { handleError } from "../../../utils/handle-error";
+import { API_BASE_URL, bitBucketAuth } from "../consts";
 
 /**
  * This method get the main branch from workspace

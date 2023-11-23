@@ -1,18 +1,20 @@
 import { handleError } from "../../../utils/handle-error";
-import { commitChanges } from "../commit-changes";
-import { createBranch } from "../create-branch";
-import { createPullRequest } from "../create-pr";
-import { getCurrentPackageJson } from "../get-current-package-json";
-import { getMainBranch } from "../get-main-branch";
+import {
+  commitChanges,
+  createBranch,
+  createPullRequest,
+  getCurrentPackageJson,
+  getMainBranch,
+  updatePackageJson,
+} from "../bit-bucket-actions";
 import { updatePackageAndOpenPR } from "../main";
-import { updatePackageJson } from "../update-package-json";
 
-jest.mock("../get-main-branch");
-jest.mock("../get-current-package-json");
-jest.mock("../create-branch");
-jest.mock("../commit-changes");
-jest.mock("../create-pr");
-jest.mock("../update-package-json");
+jest.mock("../bit-bucket-actions/get-main-branch");
+jest.mock("../bit-bucket-actions/get-current-package-json");
+jest.mock("../bit-bucket-actions/create-branch");
+jest.mock("../bit-bucket-actions/commit-changes");
+jest.mock("../bit-bucket-actions/create-pr");
+jest.mock("../bit-bucket-actions/update-package-json");
 jest.mock("../../../utils/handle-error");
 
 describe("updatePackageAndOpenPR", () => {
